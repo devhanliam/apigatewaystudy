@@ -1,0 +1,27 @@
+### 로그인 요청
+POST http://localhost:8081/login
+Content-Type: application/json
+
+{
+  "username": "liam@naver.com",
+  "password": "1234"
+}
+
+> {%
+  client.global.set("jwt", response.headers.valueOf("Authorization"))
+  %}
+### 로그인 실패
+POST http://localhost:8081/login
+Content-Type: application/json
+
+{
+"username": "liam@naver.com",
+"password": "12341"
+}
+
+### 제한된 리소스 접근
+GET http://localhost:8081/user/auth1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhY2Nlc3NfdG9rZW4iLCJyb2xlcyI6IlJPTEVfVVNFUiIsImlhdCI6MTcwNjc2OTE1OCwiZXhwIjoxNzA2Nzc4MTU4fQ.BkyF-a51zDImiyTiqEL_r5xi-wyDBjqrRs68lZgXXfE
+
+###
+GET http://localhost:8081/user/hello
